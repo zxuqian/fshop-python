@@ -8,7 +8,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.SimpleLineChart.header',
-    defaultMessage: 'This is the SimpleLineChart component !',
+    id: 'app.containers.SimpleLineChart.header',
+    defaultMessage: 'This is SimpleLineChart container !',
   },
 });

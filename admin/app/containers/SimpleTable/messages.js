@@ -8,7 +8,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.SimpleTable.header',
-    defaultMessage: 'This is the SimpleTable component !',
+    id: 'app.containers.SimpleTable.header',
+    defaultMessage: 'This is SimpleTable container !',
   },
 });
