@@ -12,16 +12,26 @@ const ngrok =
     ? require('ngrok')
     : false;
 const { resolve } = require('path');
+const proxy = require('http-proxy-middleware');
+const apiAddress = process.env.API_ADDRESS || `http://localhost:8000`;
 const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+app.use(
+  '/api',
+  proxy({
+    target: apiAddress,
+    changeOrigin: true,
+  }),
+);
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: '/',
 });
+
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;
