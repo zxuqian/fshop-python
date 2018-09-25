@@ -85,6 +85,7 @@ function SimpleTable(props) {
   );
 }
 
+
 SimpleTable.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
