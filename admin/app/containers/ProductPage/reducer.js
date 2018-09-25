@@ -1,6 +1,6 @@
 /*
  *
- * ListItems reducer
+ * ProductPage reducer
  *
  */
 
@@ -9,7 +9,7 @@ import { DEFAULT_ACTION } from './constants';
 
 export const initialState = fromJS({});
 
-function listItemsReducer(state = initialState, action) {
+function productPageReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -18,4 +18,4 @@ function listItemsReducer(state = initialState, action) {
   }
 }
 
-export default listItemsReducer;
+export default productPageReducer;

@@ -1,6 +1,6 @@
 /*
  *
- * ListItems actions
+ * ProductPage actions
  *
  */
 
