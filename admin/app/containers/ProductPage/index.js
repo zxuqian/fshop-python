@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectProductPage from './selectors';
+import makeSelectProductPage, { makeSelectProducts } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -34,15 +34,6 @@ import IconButton from '@material-ui/core/IconButton';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { fetchProducts } from './actions';
-
-
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
 
 const listWidth = 350;
 
@@ -69,7 +60,7 @@ export class ProductPage extends React.Component {
   }
 
   render() {
-    const {classes} = this.props;
+    const { classes, products } = this.props;
     return (
       // <Grid item xs={12} md={4}>
       <React.Fragment>
@@ -78,24 +69,24 @@ export class ProductPage extends React.Component {
         </Typography> */}
         <div className={classes.listContainer}>
           <List dense={false} className={classes.list}>
-            {generate(
-              <ListItem>
+            {products.map(product => (
+              <ListItem key={product.id}>
                 <ListItemAvatar>
                   <Avatar>
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="Single-line item"
-                  secondary={'Secondary text'}
+                  primary={product.title}
+                  secondary={product.description}
                 />
                 <ListItemSecondaryAction>
                   <IconButton aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
-              </ListItem>,
-            )}
+              </ListItem>
+            ))}
           </List>
         </div>
         </React.Fragment>
@@ -110,6 +101,7 @@ ProductPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   productpage: makeSelectProductPage(),
+  products: makeSelectProducts(),
 });
 
 function mapDispatchToProps(dispatch) {

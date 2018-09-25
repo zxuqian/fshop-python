@@ -29,7 +29,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 function MainListItems() {
   return (
     <div>
-      <ListItem button>
+      <ListItem button component={Link} to="/">
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>

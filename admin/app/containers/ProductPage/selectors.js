@@ -10,6 +10,8 @@ const selectProductPageDomain = state => state.get('productPage', initialState);
 /**
  * Other specific selectors
  */
+const makeSelectProducts = () =>
+  createSelector(selectProductPageDomain, state => state.get('products'));
 
 /**
  * Default selector used by ProductPage
@@ -19,4 +21,4 @@ const makeSelectProductPage = () =>
   createSelector(selectProductPageDomain, substate => substate.toJS());
 
 export default makeSelectProductPage;
-export { selectProductPageDomain };
+export { selectProductPageDomain, makeSelectProducts };
