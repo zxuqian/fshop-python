@@ -11,4 +11,8 @@ export default defineMessages({
     id: 'app.components.MainListItems.header',
     defaultMessage: 'This is the MainListItems component !',
   },
+  products: {
+    id: 'app.components.MainListItems.products',
+    defaultMessage: 'Products'
+  }
 });

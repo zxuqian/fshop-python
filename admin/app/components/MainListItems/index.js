@@ -39,7 +39,7 @@ function MainListItems() {
         <ListItemIcon>
           <BookIcon />
         </ListItemIcon>
-        <ListItemText primary="Products" />
+        <ListItemText primary={<FormattedMessage {...messages.products} />} />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
