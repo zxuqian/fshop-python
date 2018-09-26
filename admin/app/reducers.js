@@ -8,6 +8,9 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
+// redux-form reducer
+import {reducer as formReducer} from 'redux-form';
+
 /*
  * routeReducer
  *
@@ -44,5 +47,6 @@ export default function createReducer(injectedReducers) {
     route: routeReducer,
     language: languageProviderReducer,
     ...injectedReducers,
+    form: formReducer,
   });
 }

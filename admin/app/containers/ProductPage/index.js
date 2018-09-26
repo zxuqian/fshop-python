@@ -36,6 +36,13 @@ import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
 
+// redux form
+import { Field, reduxForm } from 'redux-form/immutable'; // Important! Because we are using ImmutableJS
+import ReduxFormMuiTextField from 'components/ReduxFormMuiTextField';
+import ReduxFormMuiCheckBox from 'components/ReduxFormMuiCheckBox';
+import ReduxFormMuiRadioGroup from 'components/ReduxFormMuiRadioGroup';
+import ReduxFormMuiSelectField from 'components/ReduxFormMuiSelectField';
+
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { fetchProducts } from './actions';
@@ -82,8 +89,12 @@ export class ProductPage extends React.Component {
     this.props.dispatch(fetchProducts());
   }
 
+  handleSubmit = (values) => {
+    console.log(values);
+  }
+
   render() {
-    const { classes, products } = this.props;
+    const { classes, products, handleSubmit } = this.props;
     return (
       // <Grid item xs={12} md={4}>
       <React.Fragment>
@@ -121,131 +132,42 @@ export class ProductPage extends React.Component {
               <AddIcon />
             </Button>
           </Paper>
-          <form className={classes.form} noValidate autoComplete="off">
-            <TextField
+          <form onSubmit={handleSubmit(this.handleSubmit)} className={classes.form} noValidate autoComplete="off">
+            <Field
               id="standard-name"
-              label="Name"
+              name="title"
+              label="Title"
               className={classes.textField}
               margin="normal"
+              component={ReduxFormMuiTextField}
             />
-            <TextField
+            <Field
               id="standard-uncontrolled"
-              label="Uncontrolled"
-              defaultValue="foo"
+              name="description"
+              label="Description"
               className={classes.textField}
               margin="normal"
+              component={ReduxFormMuiTextField}
             />
-            <TextField
+            <Field
               required
               id="standard-required"
-              label="Required"
-              defaultValue="Hello World"
+              name="details"
+              label="Details"
               className={classes.textField}
               margin="normal"
+              component={ReduxFormMuiTextField}
             />
-            <TextField
+            <Field
               error
               id="standard-error"
-              label="Error"
-              defaultValue="Hello World"
+              name="price"
+              label="Price"
               className={classes.textField}
               margin="normal"
+              component={ReduxFormMuiTextField}
             />
-            <TextField
-              disabled
-              id="standard-disabled"
-              label="Disabled"
-              defaultValue="Hello World"
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="standard-password-input"
-              label="Password"
-              className={classes.textField}
-              type="password"
-              autoComplete="current-password"
-              margin="normal"
-            />
-            <TextField
-              id="standard-read-only-input"
-              label="Read Only"
-              defaultValue="Hello World"
-              className={classes.textField}
-              margin="normal"
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField
-              id="standard-dense"
-              label="Dense"
-              className={classNames(classes.textField, classes.dense)}
-              margin="dense"
-            />
-            <TextField
-              id="standard-multiline-flexible"
-              label="Multiline"
-              multiline
-              rowsMax="4"
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="standard-multiline-static"
-              label="Multiline"
-              multiline
-              rows="4"
-              defaultValue="Default Value"
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="standard-helperText"
-              label="Helper text"
-              defaultValue="Default Value"
-              className={classes.textField}
-              helperText="Some important text"
-              margin="normal"
-            />
-            <TextField
-              id="standard-with-placeholder"
-              label="With placeholder"
-              placeholder="Placeholder"
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="standard-textarea"
-              label="With placeholder multiline"
-              placeholder="Placeholder"
-              multiline
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="standard-number"
-              label="Number"
-              type="number"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              margin="normal"
-            />
-            <TextField
-              id="standard-search"
-              label="Search field"
-              type="search"
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="standard-bare"
-              className={classes.textField}
-              defaultValue="Bare"
-              margin="normal"
-            />
+            <Button type="submit" variant="contained" color="primary">Submit</Button>
           </form>
         </div>
       </React.Fragment>
@@ -276,9 +198,13 @@ const withConnect = connect(
 
 const withReducer = injectReducer({ key: 'productPage', reducer });
 const withSaga = injectSaga({ key: 'productPage', saga });
+const withReduxForm = reduxForm({
+  form: 'ProductForm'
+})
 
 export default compose(
   withStyles(styles),
+  withReduxForm,
   withReducer,
   withSaga,
   withConnect,
