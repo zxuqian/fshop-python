@@ -35,6 +35,8 @@ import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
+import MenuItem from '@material-ui/core/MenuItem';
+import Chip from '@material-ui/core/Chip';
 
 // redux form
 import { Field, reduxForm } from 'redux-form/immutable'; // Important! Because we are using ImmutableJS
@@ -167,6 +169,18 @@ export class ProductPage extends React.Component {
               margin="normal"
               component={ReduxFormMuiTextField}
             />
+            <Field 
+              className={classes.textField}
+              label="Category"
+              // multiple
+              name="category"
+              inputProps={{
+                name: 'category'
+              }}
+              component={ReduxFormMuiSelectField}
+            >
+              <MenuItem value="test">test</MenuItem>
+            </Field>
             <Button type="submit" variant="contained" color="primary">Submit</Button>
           </form>
         </div>

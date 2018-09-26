@@ -30,7 +30,7 @@ function ReduxFormMuiSelectField({
         // floatingLabelText={label}
         helperText={touched && error}
         {...input}
-        onChange={(event, index, value) => input.onChange(value)}
+        // onChange={(event, index, value) => {console.log(value); input.onChange(value)}}
         children={children}
         {...custom}
       />
